@@ -30,6 +30,8 @@ try:
 					GPIO.cleanup()
 except KeyboardInterrupt:
 	print "Key pressed. Quitting."
+	pwm.start(3)
+	time.sleep(1)
 	pwm.stop()
 	GPIO.cleanup()
 
