@@ -14,20 +14,22 @@ positionList = [leftPosition, rightPosition]
 
 msPerCycle = 1000 / frequency
 count = 0
+positionText = "Watering"
 try:
 	for position in positionList:
-			dutyCyclePercentage = position * 100 / msPerCycle
-			print "Position: " + str(position)
-			print "Duty Cycle: " + str(dutyCyclePercentage) + "%"
-			print ""
-			pwm.start(dutyCyclePercentage)
-			if count == 0:
-					time.sleep(60)
-					count += 1
-			else:
-					time.sleep(.5)
-					pwm.stop()
-					GPIO.cleanup()
+                dutyCyclePercentage = position * 100 / msPerCycle
+                print "STATUS: " + str(positionText)
+                print "Duty Cycle: " + str(dutyCyclePercentage) + "%"
+                print ""
+                pwm.start(dutyCyclePercentage)
+                if count == 0:
+                                time.sleep(60)
+                                count += 1
+                                positionText = "CLOSE VALVE"
+                else:
+                                time.sleep(.5)
+                                pwm.stop()
+                                GPIO.cleanup()
 except KeyboardInterrupt:
 	print "Key pressed. Quitting."
 	pwm.start(2 * 100 / msPerCycle)
