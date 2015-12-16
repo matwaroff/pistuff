@@ -22,7 +22,7 @@ try:
 			print ""
 			pwm.start(dutyCyclePercentage)
 			if count == 0:
-					time.sleep(55)
+					time.sleep(60)
 					count += 1
 			else:
 					time.sleep(.5)
