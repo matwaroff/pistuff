@@ -1,17 +1,19 @@
 import RPi.GPIO as GPIO
 import time
 
+pinLED = 12
+pinServo = 11
+
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.OUT) ## SERVO
-GPIO.setup(12, GPIO.OUT) ## LED
+GPIO.setup(pinServo, GPIO.OUT) ## SERVO
+GPIO.setup(pinLED, GPIO.OUT) ## LED
 frequency = 50
-pwm = GPIO.PWM(11, frequency)
+pwm = GPIO.PWM(pinServo, frequency)
 
-leftPosition = .95
-rightPosition = 1.5
-middlePosition = (rightPosition - leftPosition) / 2 + leftPosition
+onPosition = .95
+offPosition = 1.5
 
-positionList = [leftPosition, rightPosition]
+positionList = [onPosition, offPosition]
 
 msPerCycle = 1000 / frequency
 count = 0
@@ -29,14 +31,14 @@ try:
 			count += 1
 			positionText = "CLOSE VALVE"
 		else:
-			GPIO.output(12, False) ## Lights Off
+			GPIO.output(pinLED, False) ## Lights Off
 			time.sleep(.5)
 			pwm.stop()
 			GPIO.cleanup()
 			
 except KeyboardInterrupt:
 	print "Key pressed. Quitting."
-	pwm.start(rightPosition * 100 / msPerCycle)
+	pwm.start(offPosition * 100 / msPerCycle)
 	time.sleep(1)
 	pwm.stop()
 	GPIO.cleanup()
