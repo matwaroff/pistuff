@@ -2,7 +2,8 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.OUT)
+GPIO.setup(11, GPIO.OUT) ## SERVO
+GPIO.setup(12, GPIO.OUT) ## LED
 frequency = 50
 pwm = GPIO.PWM(11, frequency)
 
@@ -15,6 +16,7 @@ positionList = [leftPosition, rightPosition]
 msPerCycle = 1000 / frequency
 count = 0
 positionText = "Watering"
+GPIO.output(12, True) ##Lights On
 try:
 	for position in positionList:
                 dutyCyclePercentage = position * 100 / msPerCycle
@@ -27,6 +29,7 @@ try:
                                 count += 1
                                 positionText = "CLOSE VALVE"
                 else:
+								GPIO.output(12, False) ## Lights Off
                                 time.sleep(.5)
                                 pwm.stop()
                                 GPIO.cleanup()
