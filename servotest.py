@@ -18,3 +18,5 @@ print ""
 pwm.start(dutyCyclePercentage)
 time.sleep(3)
 pwm.stop()
+
+GPIO.cleanup()

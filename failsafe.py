@@ -10,8 +10,7 @@ GPIO.setup(pinLED, GPIO.OUT) ## LED
 frequency = 50
 pwm = GPIO.PWM(pinServo, frequency)
 
-onPosition = .95
-offPosition = 1.5
+offPosition = 1.25
 
 msPerCycle = 1000 / frequency
 count = 0

@@ -17,7 +17,7 @@ positionList = [onPosition, offPosition]
 
 msPerCycle = 1000 / frequency
 count = 0
-sleepLength = 40 ## How long to sleep
+sleepLength = 20 ## How long to sleep
 positionText = "Watering"
 GPIO.output(12, True) ##Lights On
 
